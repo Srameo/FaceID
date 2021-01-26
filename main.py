@@ -39,7 +39,7 @@ while (vid.isOpened()):
             # Enter the name as in label.json file, for which the computer should log in
             if labels[idd] == "srameo":
                 pyautogui.click()
-                pyautogui.write('JinSr@meo0217')   # Enter you password here
+                pyautogui.write('')   # Enter you password here
                 pyautogui.press('enter')
                 # Ask it to say whatever you want when user logs in
                 os.system("echo welcome srameo!")
