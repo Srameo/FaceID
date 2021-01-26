@@ -13,3 +13,14 @@
 ## Usage
 - just run the code below!
   - for setup
+    ```
+    ./setup.sh
+    ```
+  - for start
+    ```
+    ./start.sh
+    ```
+  - for clean
+    ```
+    ./setup.sh
+    ```
