@@ -1,3 +1,9 @@
+# train data
+/Image
+
+# model
+/Model
+
 # MacOS
 .DS_Store
 
