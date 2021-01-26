@@ -1,11 +1,15 @@
+from io import BufferedIOBase
 import os
+import sys
+import time
+root_path = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(root_path)
 from face_detector import FaceDetector
 import cv2
 import pyautogui
 import json
 
 face = FaceDetector()
-root_path = os.path.abspath(os.path.dirname(__file__))
 font = cv2.FONT_HERSHEY_PLAIN
 detector = cv2.face.LBPHFaceRecognizer_create()  # detector for trec or recognizer
 # Use the full path of your trained.yml file. This file contains the weights for your face
@@ -17,10 +21,14 @@ vid = cv2.VideoCapture(0)
 with open(f'{root_path}/Model/label.json', 'r') as f:
     labels = {a: b for b, a in json.load(f).items()}
 
+start_time = time.time()
 while (vid.isOpened()):
     _, frame = vid.read()
     frame = cv2.flip(frame, 1)
     img, roi, x, y = face.detect(frame)
+
+    if time.time() - start_time > 10.0:
+        break
 
     if roi is not None:
         idd, conf = detector.predict(roi)
@@ -45,3 +53,6 @@ while (vid.isOpened()):
     key = cv2.waitKey(1) & 0xFF
     if key == ord("q"):
         break
+
+print(f"spend time: {time.time() - start_time}")
+vid.release()

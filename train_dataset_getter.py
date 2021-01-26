@@ -42,6 +42,8 @@ while more.lower() == "y":
 
             time.sleep(0.001)
 
+        camera.release()
+
     print("\r[" + "=" * length + "=]", "100.0%")
     print(f"{name} data collected!")
     more = input("Is there more people? [Y/n]: ")
