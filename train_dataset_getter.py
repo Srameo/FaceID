@@ -27,16 +27,18 @@ while more.lower() == "y":
         while count < total_count:
             ret, frame = camera.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            faces = face_model.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
+            faces = face_model.detectMultiScale(
+                gray, scaleFactor=1.5, minNeighbors=5)
 
             for (x, y, w, h) in faces:
-                if (x,y,w,h) != (0,0,0,0):
-                    cv2.imwrite(os.path.join(data_path, f"{count}.jpg"), frame[y:y+h, x:x+w])
+                if (x, y, w, h) != (0, 0, 0, 0):
+                    cv2.imwrite(os.path.join(
+                        data_path, f"{count}.jpg"), frame[y:y+h, x:x+w])
                     count += 1
                     percent = count / total_count
                     num = int(length * percent)
                     print("\r[" + "=" * num + ">" + " " * (length - num) + "]",
-                        f"{percent * 100:.1f}%", end="")
+                          f"{percent * 100:.1f}%", end="")
 
             time.sleep(0.001)
 
