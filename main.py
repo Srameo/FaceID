@@ -1,14 +1,16 @@
-from io import BufferedIOBase
 import os
 import sys
 import time
+
 root_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(root_path)
+
 from face_detector import FaceDetector
 import cv2
 import pyautogui
 import json
 
+time_limit = 10.0
 face = FaceDetector()
 font = cv2.FONT_HERSHEY_PLAIN
 detector = cv2.face.LBPHFaceRecognizer_create()  # detector for trec or recognizer
@@ -27,7 +29,7 @@ while (vid.isOpened()):
     frame = cv2.flip(frame, 1)
     img, roi, x, y = face.detect(frame)
 
-    if time.time() - start_time > 10.0:
+    if time.time() - start_time > time_limit:
         break
 
     if roi is not None:
